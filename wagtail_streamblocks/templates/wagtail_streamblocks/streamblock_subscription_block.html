@@ -1,0 +1,30 @@
+{% load wagtailimages_tags %}
+<div class="subscription-block {{ content.block_class|default:"" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper-small">
+    <div class="subscription-block__content">
+        {% if content.subscription_heading %}
+            <{{ content.subscription_tag_type }} class="subscription-block__heading">{{ content.subscription_heading }} </{{ content.subscription_tag_type }}>
+        {% endif %}
+        <div class="subscription-block__text">
+            {{ content.subscription_text|safe }}
+        </div>
+
+        <p class="subscription-block__name">{{ content.subscription_form_name }}</p>
+        
+        <form class="subscription-form">
+            <input name="email" type="text" class="subscription-email" placeholder="Email"/>
+            <button type="button" class="subscription-btn btn-primary">get started for free</button>
+        </form>
+        <span>{{ content.subscription_form_bottom }}</span>
+    </div>
+    </div>
+</div>
+ <script type="text/javascript">
+        $(document).ready(function () {
+            var subsrcription_url = "{{ content.subscription_url }}"; 
+             $('.subscription-btn').click(function () {
+                    var email = $('.subscription-email').val();
+                    window.location.href = subsrcription_url+"?email="+email;
+             });
+        });
+</script>

@@ -1,0 +1,33 @@
+<div
+{% if content.block_id %} id="{{ content.block_id }}"{% endif %}
+class="plan-block {{ content.block_class|default:"" }}">
+    <div class="wrapper">
+
+        <div class="plan-block__intro">
+            {% if content.heading %}
+            <{{ content.heading_type }}>
+                {{ content.heading }}
+            </{{ content.heading_type }}>
+            {% endif %}
+            {% if content.description %}
+                {{ content.description }}
+            {% endif %}
+        </div>
+
+        <div class="plan-block__plans">
+            {% for list in content.display_plan %}
+                <div data-number="{{ list.plan.number_of_contacts }}" class="plan-block__plan-block">
+                    <span>{{ list.plan.name }}</span>
+                    <span>${{ list.plan.monthly_price }}</span>
+                    <ul>
+                     {% for list2 in list.plan.features %}
+                        <li>{{ list2.value.feature }}</li>
+                     {% endfor %}
+                    </ul>
+                    <span>{{ list.plan_description }}</span>
+                    <a class="btn" href="{{ list.onboarding_url }}">Sign up</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

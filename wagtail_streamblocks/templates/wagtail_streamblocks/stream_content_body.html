@@ -1,0 +1,85 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% for content_block in content %}
+    {% if content_block.block_type == 'heading' %}
+        <div class="heading-block">
+            <div class="wrapper">
+                {% if content_block.value.heading_type == "h2" %}
+                    <h2>{{ content_block.value.heading_text }}{% if content.block_heading_fullstop %}<span class="{{ content.block_heading_fullstop}}">.</span>{% endif%}</h2>
+                {% elif content_block.value.heading_type == "h3" %}
+                    <h3>{{ content_block.value.heading_text }}{% if content.block_heading_fullstop %}<span class="{{ content.block_heading_fullstop}}">.</span>{% endif%}</h3>
+                {% elif content_block.value.heading_type == "h4" %}
+                    <h4>{{ content_block.value.heading_text }}{% if content.block_heading_fullstop %}<span class="{{ content.block_heading_fullstop}}">.</span>{% endif%}</h4>
+                {% elif content_block.value.heading_type == "h5" %}
+                    <h5>{{ content_block.value.heading_text }}{% if content.block_heading_fullstop %}<span class="{{ content.block_heading_fullstop}}">.</span>{% endif%}</h5>
+                {% elif content_block.value.heading_type == "h6" %}
+                    <h6>{{ content_block.value.heading_text }}{% if content.block_heading_fullstop %}<span class="{{ content.block_heading_fullstop}}">.</span>{% endif%}</h6>
+                {% endif %}
+            </div>
+        </div>
+    {% elif content_block.block_type == 'button' %}
+    <div class="blocks-cta">
+        <div class="wrapper">
+            <a {% if content_block.value.new_tab %}target="_blank"{% endif %}
+             class="blocks-cta__link {{ content_block.value.button_color }} {{content_block.value.button_class}}"
+               href="{{ content_block.value.button_url }}">{{ content_block.value.button_name|safe }}</a>
+        </div>
+    </div>
+    {% elif content_block.block_type == 'accordion' %}
+    <div class="wrapper">
+        <div class="accordion-item">
+            <div class="accordion-item__control-container">
+                <a href="#" class="accordion-item__title-container accordion-item__title-container--toggle-off" title="Click to open!">
+                <span class="accordion-item__title">{{ content_block.value.accordion_heading }}</span>
+                <span class="accordion-item__arrow"></span>
+                </a>
+            </div>
+            <div class="accordion-item__body" style="display: none;">
+                <div class="accordion-item__body-wrapper">
+                    {{ content_block.value.accordion_content }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif content_block.block_type == 'quote' %}
+        <div class="blockquote-block">
+            <div class="wrapper">
+                <blockquote>
+                    {{ content_block.value.quote }}
+                </blockquote>
+            </div>
+        </div>
+    {% elif content_block.block_type == 'table' %}
+    <div class="table">
+            <div class="wrapper">
+            {{ content_block }}
+            </div>
+        </div>
+    {% elif content_block.block_type == 'image' %}
+    <div class="image-block">
+        <div class="wrapper">
+            <figure class="image {{ content_block.value.image_position }}">
+                {% image content_block.value.image original %}
+                {% if content_block.value.image_caption %}
+                    <figcaption>{{ content_block.value.image_caption }}</figcaption>
+                {% endif %}
+            </figure>
+        </div>
+    </div>
+    {% elif content_block.block_type == 'form' %}
+        <div id={{ content_block.value.form.slug}} class="form-block">
+            <div class="wrapper">
+                {% include_block content_block %}
+            </div>
+        </div>
+
+    {% elif content_block.value.block_template %}
+        {% include content_block.value.block_template with content=content_block.value %}
+    {% else %}
+        <div class="other-block">
+            <div class="wrapper">
+                {% include_block content_block %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

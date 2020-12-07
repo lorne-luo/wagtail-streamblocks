@@ -1,0 +1,65 @@
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+<div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %}  class="static-block wrapper {{ content.block_class }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="dashboard-demo">
+        <div class="dashboard-demo__top"></div>
+        <div class="dashboard-demo__content">
+            <div class="dashboard-demo__sidebar">
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+                <div class="menu-item"><span class="circle"></span> <span class="rectangle"></span></div>
+            </div>
+            <div class="dashboard-demo__main">
+                <div class="dashboard-demo__button"><span class="dashboard-demo__button-hover"></span></div>
+                <div class="dashboard-demo__container">
+                    <div class="dashboard-demo__panel"></div>
+                    <div class="dashboard-demo__toolbar">
+                    </div>
+                    <div class="dashboard-demo__placeholder dashboard-demo__placeholder--1"><img class="dashboard-demo__placeholder-banner" src="/static/img/demo-banner.png" /></div>
+                    <div class="dashboard-demo__placeholder dashboard-demo__placeholder--1-1"><img class="dashboard-demo__placeholder-banner-1" src="/static/img/demo-banner.png" /></div>
+                    <img class="dashboard-demo__placeholder dashboard-demo__placeholder--2" src="/static/img/demo-img.png" />
+                    <img class="dashboard-demo__placeholder dashboard-demo__placeholder--2-1" src="/static/img/demo-img.png" />
+                    <img class="dashboard-demo__placeholder dashboard-demo__placeholder--3" src="/static/img/demo-text.png" />
+                    <img class="dashboard-demo__placeholder dashboard-demo__placeholder--3-1" src="/static/img/demo-text.png" />
+                     <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--4"> </div>
+                      <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--5"> </div>
+                       <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--6"> </div>
+                        <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--7"> </div>
+                      <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--8"> </div>
+                       <div class="dashboard-demo__placeholder dashboard-demo__placeholder--square dashboard-demo__placeholder--9"> </div>
+                </div>
+                <div class="dashboard-demo__list">
+                    <div class="heading">Your lists
+                    </div>
+                    <div class="item">Newsletter subscribers
+                    <span class="checkbox checkbox--tick">
+                        <svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 37 37" style="enable-background:new 0 0 37 37;" xml:space="preserve">
+                            <polyline class="tick path" style="fill:none;stroke:#fff;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                                11.6,20 15.9,24.2 26.4,13.8 "/>
+                        </svg>
+                        </span>
+                    </div>
+                    <div class="item">Website signups<span class="checkbox"></span></div>
+                    <div class="item">Competition winners<span class="checkbox"></span></div>
+                </div>
+               <div class="dashboard-demo__success">
+                    <div class="heading dashboard-demo__success-msg">Your email has been sent!</div>
+                    <svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 37 37" style="enable-background:new 0 0 37 37;" xml:space="preserve">
+                        <path class="circ path" style="fill:none;stroke:#2474EB;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" d="
+                            M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"
+                            />
+                        <polyline class="tick path" style="fill:none;stroke:#2474EB;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                            11.6,20 15.9,24.2 26.4,13.8 "/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

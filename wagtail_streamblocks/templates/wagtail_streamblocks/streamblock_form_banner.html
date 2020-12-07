@@ -1,0 +1,80 @@
+{% load wagtailimages_tags %}
+{% image content.default_bg original as banner_dk_img %}
+{% image content.tablet_bg original as banner_tb_img %}
+{% image content.mobile_bg original as banner_mb_img %}
+
+<div class="page-banner form-banner {{ content.block_class|default:"" }}"
+    {% if content.block_id %}id="{{ content.block_id }}" {% endif %}>
+    <div class="wrapper-large">
+        <div class="page-banner__content">
+            {% if content.heading %}
+            <{{ content.heading_type }} class="page-banner__heading">{{ content.heading }} </{{ content.heading_type }}>
+            {% endif %}
+            <div class="page-banner__text">
+                <div class="page-banner__desc">
+                    {% if content.paragraph %}
+                    <div class="page-banner-banner__text">{{ content.paragraph|safe }}</div>
+                    {% endif %}
+                    {% if content.paragraph_button_name %}
+                    <a class="page-banner__btn btn btn-large btn-primary scheme-color"
+                        href="{% if content.paragraph_button_url %}{{content.paragraph_button_url}}{% endif %}">
+                        {{ content.paragraph_button_name }}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="page-banner__form">
+            <p class="page-banner__subscription-name">Create professional campaigns today</p>
+
+            <form class="page-banner__subscription-form">
+                <input name="email" type="text" class="page-banner__subscription-email" placeholder="Email" />
+                <button type="button" class="page-banner__subscription-btn btn-primary">get started for
+                    free</button>
+            </form>
+            <span>Sign up today for a free 30-day trial.</span>
+            <div class="page-banner__image"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var subsrcription_url = "/get-started";
+        $('.page-banner__subscription-btn').click(function () {
+            var email = $('.page-banner__subscription-email').val();
+            window.location.href = subsrcription_url + "?email-address=" + email;
+        });
+    });
+</script>
+{% block extra_css %}
+<style>
+    {% if content.block_background_color %}
+        .page-banner__image {
+            background-color: {
+                {
+                    content.block_background_color
+                }
+            }
+        }
+    {% endif %}
+    {% if banner_dk_img %}
+        .page-banner__image {
+            background-image:url("{{banner_dk_img.url}}");
+        }
+    {% endif %}
+    {% if banner_tb_img %}
+        @media screen and (max-width: 1199px) {
+            .page-banner__image {
+                background-image:url("{{banner_tb_img.url}}");
+            }
+        }
+    {% endif %}
+        {% if banner_mb_img %}
+        @media screen and (max-width: 767px) {
+            .page-banner {
+                background-image:url("{{banner_mb_img.url}}");
+            }
+        }
+    {% endif %}
+</style>
+{% endblock %}

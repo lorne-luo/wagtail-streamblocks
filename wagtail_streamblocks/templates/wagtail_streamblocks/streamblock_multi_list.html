@@ -1,0 +1,43 @@
+{% load wagtailimages_tags %}
+<div class="multi-list {{ content.block_class|default:"blocks-parcels js-objectfit-callback" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+        {% if content.block_heading %}
+            <h2 class="multi-list__heading">
+                {{ content.block_heading }}
+            </h2>
+        {% endif %}
+        {% if content.block_description %}
+            <div class="multi-list__desc">{{ content.block_description }}</div>
+        {% endif %}
+        <div class="multi-list__wrapper">
+            {% for list in content.items_section %}
+            {% image list.image original as photo %}
+                <div class="multi-list__block">
+                    <div class="multi-list__block-img js-objectfit-callback">
+                        <img src="{{photo.url}}" alt="{{ content.image_link }}">
+                    </div>
+                    <div class="multi-list__block-text">
+                        <div class="multi-list__block-heading">{{ list.heading }}</div>
+                        <div class="multi-list__block-desc">
+                            {{ list.text }}
+                        </div>
+
+                        {% if list.image_link %}
+                            <div class="multi-list__block-url-box">
+                            <a class="multi-list__block-url" href="{{ list.image_link }}"><span class="icon icon-arrow-right"></span></a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+        {% if content.multi_block_url_text %}
+            <a class="multi-list__btn btn btn-tertiary "
+               href="{% if content.multi_block_url %}{{ content.multi_block_url }}{% endif %}">
+                {{ content.multi_block_url_text }}
+            </a>
+        {% endif %}
+    </div>
+</div>

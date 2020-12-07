@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+<div {% if content.block_id %}id="{{ content.block_id }}"{% endif %}
+ class="responsive-image-block {{ content.block_class|default:"" }} " >
+ {% image content.default_image original as photo_desktop %}
+ {% image content.tablet_image original as photo_tablet %}
+ {% image content.mobile_image original as photo_mobile %}
+ 	<div class="wrapper">
+ 		<figure class="image {{ content.image_position }} {{ content.image_size }}">
+		<picture>
+			<source media="(max-width: 767px)" srcset="{{photo_mobile.url}}">
+			<source media="(min-width: 768px) and (max-width: 1199px)" srcset="{{photo_tablet.url}}">
+			<img src="{{photo_desktop.url}}" alt="{{ content.default_image }}">
+		</picture>
+		{% if content.image_caption %}
+            <figcaption>{{ content.image_caption }}</figcaption>
+        {% endif %}
+		</figure>
+	</div>
+</div>

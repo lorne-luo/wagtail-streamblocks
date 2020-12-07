@@ -1,0 +1,8 @@
+ <div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %} class="blockquote-block {{ content.block_class|default:"" }}" 
+{% if content.block_id %} id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+        <blockquote data-aos="flip-up">
+            {{ content.quote|safe }}
+        </blockquote>
+    </div>
+</div>

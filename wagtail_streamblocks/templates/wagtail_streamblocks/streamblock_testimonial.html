@@ -1,0 +1,23 @@
+{% load wagtailimages_tags %}
+{% image content.testimonial.image original as testimonial_img %}
+<div
+{% if content.block_id %} id="{{ content.block_id }}"{% endif %}
+class="testimonial-block {{ content.block_class|default:"" }}">
+    <div class="wrapper">
+        <div class="testimonial-block__wrapper">
+            {% if testimonial_img.url %}
+                <img src="{{ testimonial_img.url }}"/>
+            {% endif %}
+
+            <div class="testimonial-block__content">
+                <div class="testimonial-block__text">
+                    {{content.testimonial.testimonial|safe}}
+                </div>
+                <div class="testimonial-block__position">
+                    {{content.testimonial.name}}, {{content.testimonial.position}}
+                </div>
+            </div>
+         
+        </div>
+    </div>
+</div>

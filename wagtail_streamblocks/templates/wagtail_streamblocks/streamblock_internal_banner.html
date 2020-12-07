@@ -1,0 +1,54 @@
+{% load wagtailimages_tags %}
+{% image content.default_bg original as banner_dk_img %}
+{% image content.tablet_bg original as banner_tb_img %}
+{% image content.mobile_bg original as banner_mb_img %}
+
+<div class="page-banner-internal {{ content.block_class|default:'' }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+    <div class="page-banner-internal__content">
+            {% if content.heading %}
+                <{{ content.heading_type }} class="page-banner-internal__heading">{{ content.heading }} </{{ content.heading_type }}>
+            {% endif %}
+            <div class="page-banner-internal__desc">
+                {% if content.paragraph %}
+                    <div class="page-banner-banner__text">{{ content.paragraph|safe }}</div>
+                {% endif %}
+                {% if content.paragraph_button_name %}
+                    <a class="page-banner-internal__btn btn btn-large btn-primary scheme-color" href="{% if content.paragraph_button_url %}{{content.paragraph_button_url}}{% endif %}">
+                    {{ content.paragraph_button_name }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    {% if content.block_background_color %}
+        .page-banner-internal {
+            background-color: {{ content.block_background_color }};
+        }
+    {% endif %}
+    {%if banner_dk_img %}
+        .page-banner-internal {
+            background-image:url("{{banner_dk_img.url}}");
+        }
+    {% endif%}
+
+    {% if banner_tb_img %}
+        @media screen and (max-width: 1199px) {
+            .page-banner-internal {
+                background-image:url("{{banner_tb_img.url}}");
+            }
+        }
+    {% endif %}
+    {% if banner_mb_img %}
+        @media screen and (max-width: 767px) {
+            .page-banner-internal {
+                background-image:url("{{banner_mb_img.url}}");
+            }
+        }
+    {% endif %}
+</style>
+{% endblock %}

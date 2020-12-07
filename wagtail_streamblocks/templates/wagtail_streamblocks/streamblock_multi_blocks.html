@@ -1,0 +1,35 @@
+{% load wagtailimages_tags %}
+<div data-aos="zoom-in-down" {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %}  class="multi-blocks {{ content.block_class|default:" js-objectfit-callback" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+        {% if content.block_heading %}
+            <h2 class="multi-blocks__heading">
+                {{ content.block_heading }}
+            </h2>
+        {% endif %}
+        {% if content.block_description %}
+            <div class="multi-blocks__desc">{{ content.block_description }}</div>
+        {% endif %}
+
+        <div class="multi-blocks__wrapper">
+            {% for list in content.items_section %}
+            {% image list.image original as photo %}
+            <a class="multi-blocks__block-card" href="{{list.image_link}}">
+                <div class="multi-blocks__block-img js-objectfit-callback">
+                    <img src="{{photo.url}}" alt="{{ content.image_link }}">
+                </div>
+                <div class="multi-blocks__block-heading">{{ list.heading }}</div>  
+
+                <div class="multi-blocks__block-desc">
+                    {{ list.text }}
+                </div> 
+            </a>
+            {% endfor %}
+        </div>
+        {% if content.block_url_text %}
+            <a class="multi-blocks__btn btn btn-primary"
+               href="{% if content.block_url %}{{ content.block_url }}{% endif %}">
+                {{ content.block_url_text }}
+            </a>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %}  {% if content.block_id %}id="{{ content.block_id }}"{% endif %}
+ class="blocks-cta {{ content.block_class|default:"" }} ">
+ 	<div class="wrapper">
+ 		<div class="blocks-cta__heading">
+ 			{{ content.call_to_action_heading|safe }}
+ 		</div>
+ 		<div class="blocks-cta__text">
+ 			{{ content.call_to_action_text|safe }}
+		 </div>
+		 {% if content.call_to_action_button_label %}
+			<a class="blocks-cta__link btn btn-primary scheme-color" href="{{ content.call_to_action_button_link }}">
+				{{ content.call_to_action_button_label }}
+			</a>
+		 {% endif %}
+ 	</div>
+</div>

@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+<div data-aos="fade-right" class="paragraph {{ content.block_class|default:"" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+    <div class="paragraph__content" data-aos="zoom-out">
+	    {% if content.paragraph_heading %}
+	        <{{ content.paragraph_tag_type }} class="paragraph__heading">
+	            {{ content.paragraph_heading }}
+	        </{{ content.paragraph_tag_type }}>
+	    {% endif %}
+    	<div class="paragraph__text">
+    		{{ content.paragraph_text }}
+    	</div>
+    </div>
+    {% if content.paragraph_button_url %}
+    <a class="btn btn-primary" href="{{ content.paragraph_button_url }}">{{content.paragraph_button_name}}
+    </a>
+    {% endif %}
+    </div>
+</div>

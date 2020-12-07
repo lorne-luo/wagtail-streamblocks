@@ -1,0 +1,37 @@
+{% load wagtailimages_tags %}
+<div data-aos="zoom-in-down" {% if content.block_background_color %}
+    style="background-color:{{ content.block_background_color }};" {% endif %}
+    class="slider-blocks {{ content.block_class|default:" js-objectfit-callback" }}"
+    {% if content.block_id %}id="{{ content.block_id }}" {% endif %}>
+    <div class="wrapper-large">
+        {% if content.block_heading %}
+        <h1 class="slider-blocks__heading">
+            {{ content.block_heading }}
+        </h1>
+        {% endif %}
+        {% if content.block_description %}
+        <div class="slider-blocks__desc">{{ content.block_description }}</div>
+        {% endif %}
+        <div class="slider-blocks__wrapper">
+            <div class="slider-blocks__slider-nav">
+                {% for list in content.slide %}
+                <div class="slider-blocks__slider-heading"><span>{{ list.heading }}</span></div>
+                {% endfor %}
+            </div>
+
+            <div class="slider-blocks__slider-contents">
+                {% for list in content.slide %}
+                {% image list.image original as photo %}
+                <div class="slider-block">
+                    <div class="slider-block__slider-img">
+                        <img src="{{photo.url}}">
+                    </div>
+                    <div class="slider-block__slider-desc">
+                        {{ list.text }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+<div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %}  class="article-block {{ content.block_class }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+        
+        {% if content.block_heading %}
+        <{{ content.block_tag_type }} class="article-block__heading">{{ content.block_heading }}</{{ content.block_tag_type }}>
+        {% endif %}
+
+        {% if content.block_description %}
+            <div class="article-block__desc">{{ content.block_description }}</div>
+        {% endif %}
+
+        <div class="article-block__wrapper">
+            {% for article in content.display_article %}
+
+
+            <div class="article-block__block {{article.article_page.specific.categories.category_color}} scene scene--card">
+				<div class="card">
+                    <div class="article-block__block-img js-objectfit-callback">
+                        {% image article.article_page.specific.intro_image original as photo %}
+                        <img src="{{photo.url}}">
+                        <span
+                            class="block-img__icon">{% image article.article_page.specific.categories.image original class="icon" %}</span>
+                    </div>
+                    <h3 class="article-block__block-heading">{{ article.article_page.title }}</h3>
+                    <div class="article-block__block-call-to-action">
+                        <a href="{% pageurl article.article_page %}">Read more</a>
+                    </div>
+                </div>
+			</div>
+            {% endfor %}
+        </div>
+        {% if content.block_url_text %}
+            <a class="multi-blocks__btn btn btn-primary"
+               href="{% if content.block_url %}{{ content.block_url }}{% endif %}">
+                {{ content.block_url_text }}
+            </a>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,49 @@
+{% load wagtailimages_tags %}
+ <div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %} class="content-block blocks-info {{ content.block_class|default:"" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper">
+        {% if content.info_block_heading %}
+            <h2 class="content-block__heading scheme-color">{{ content.info_block_heading }}</h2>
+        {% endif %}
+        <div class="content-wrapper">
+        {# Info Block Left #}
+        {% if content.info_block_image_position == 'left' %}
+            
+            <div class="content-block__image" data-aos="fade-right">
+                {% image content.info_block_image original as photo %}
+                <img src="{{photo.url}}" >
+            </div>
+            <div class="content-block_content content-block_content__right {% if content.info_block_icon_section %}with-icons{% endif %}">
+                
+                {% if content.info_block_text %}
+                    <div class="content-block__text">{{ content.info_block_text }}</div>
+                {% endif %}
+            
+                {% if content.info_block_button_name %}
+                    <a class="content-block__btn btn btn-primary scheme-color" href="{% if content.info_block_button_url %}{{ content.info_block_button_url }}{% endif%}">
+                        {{ content.info_block_button_name }}
+                    </a>
+                {% endif %}
+            </div>
+        {# Info Block Right #}
+        {% else %}
+            <div class="content-block_content content-block_content__left {% if content.info_block_icon_section %}with-icons{% endif %}">
+                <div class="content-block_content__top">
+                    {% if content.info_block_text %}
+                        <div class="content-block__text">{{ content.info_block_text }}</div>
+                    {% endif %}
+
+                    {% if content.info_block_button_name %}
+                        <a class="content-block__btn btn btn-primary scheme-color" href="{% if content.info_block_button_url %}{{ content.info_block_button_url }}{% endif%}">
+                            {{ content.info_block_button_name }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="content-block__image" data-aos="fade-left">
+                {% image content.info_block_image original as photo %}
+                <img src="{{photo.url}}" >
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>

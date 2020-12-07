@@ -1,0 +1,9 @@
+invoke
+twine
+wheel
+zest.releaser
+
+
+django==2.2.16
+wagtail==2.10.2
+wagtailmedia==0.5.0

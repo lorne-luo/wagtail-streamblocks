@@ -1,0 +1,23 @@
+{% load wagtailimages_tags %}
+<div
+{% if content.block_id %} id="{{ content.block_id }}"{% endif %}
+class="company-block {{ content.block_class|default:"" }}">
+    <div class="wrapper">
+
+        <div class="company-block__intro">
+            {% if content.heading %}
+            <{{ content.heading_type }}>{{ content.heading }}</{{ content.heading_type }}>
+            {% endif %}
+            {% if content.description %}
+                {{ content.description }}
+            {% endif %}
+        </div>
+
+        <div class="company-block__company">
+            {% for list in content.display_company %}
+                {% image list.company.image original as company_img %}
+                <div style="background-image:url({{company_img.url}})"></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

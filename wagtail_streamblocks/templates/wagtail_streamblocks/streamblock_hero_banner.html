@@ -1,0 +1,46 @@
+{% load wagtailimages_tags %}
+{% image content.default_bg original as banner_dk_img %}
+{% image content.tablet_bg original as banner_tb_img %}
+{% image content.mobile_bg original as banner_mb_img %}
+
+<div class="page-banner {{ content.block_class|default:"" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+    <div class="wrapper-large">
+        <div class="page-banner__container">
+            <div class="page-banner__image">
+                <picture>
+                    <source media="(max-width: 767px)" srcset="{{banner_mb_img.url}}">
+                    <source media="(min-width: 768px) and (max-width: 1199px)" srcset="{{banner_tb_img.url}}">
+                    <img src="{{banner_dk_img.url}}" >
+                </picture>
+            </div>
+            <div class="page-banner__content">
+            {% if content.heading %}
+                <{{ content.heading_type }} class="page-banner__heading">{{ content.heading }} </{{ content.heading_type }}>
+            {% endif %}
+            <div class="page-banner__desc">
+                {% if content.paragraph %}
+                    <div class="page-banner__text">{{ content.paragraph|safe }}</div>
+                {% endif %}
+                {% if content.paragraph_button_name %}
+                <div class="page-banner__button">
+                    <a class="page-banner__btn btn btn-primary scheme-color" href="{% if content.paragraph_button_url %}{{content.paragraph_button_url}}{% endif %}">
+                    {{ content.paragraph_button_name }}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% block extra_css %}
+<style>
+    {% if content.block_background_color %}
+        .page-banner{
+            background-color: {{ content.block_background_color }};
+        }
+    {% endif %}
+</style>
+{% endblock %}

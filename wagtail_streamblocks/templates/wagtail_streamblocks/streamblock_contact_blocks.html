@@ -1,0 +1,26 @@
+{% load wagtailimages_tags %}
+<div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %}  {% if content.block_id %}id="{{ content.block_id }}"{% endif %}
+ class="blocks-cta {{ content.block_class|default:"" }} ">
+ 	<div class="wrapper">
+ 		<div class="blocks-cta__heading">
+ 			{{ content.heading|safe }}
+ 		</div>
+ 		<div class="blocks-cta__text">
+ 			{{ content.text|safe }}
+ 		</div>
+ 		<div class="blocks-cta__contacts">
+            {% for list in content.display_contacts %}
+                {% image list.contact.image original as profile_img %}
+                <div class="blocks-cta__contact">
+					<img src="{{profile_img.url}}" alt="{{list.contact.name}}"/>
+					<div class="blocks-cta__contact-info">
+						<p class="blocks-cta__contact-name">{{list.contact.name}}:</p>
+						<p class="blocks-cta__contact-phone">{{list.contact.phone}}</p>
+						<a href="mailto:{{list.contact.email}}" class="blocks-cta__contact-email">{{list.contact.email}}</p>
+					</div>
+				</div>
+		   
+				{% endfor %}
+        </div>
+ 	</div>
+</div>

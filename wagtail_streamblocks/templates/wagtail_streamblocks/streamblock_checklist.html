@@ -1,0 +1,25 @@
+{% load wagtailimages_tags %}
+<div {% if content.block_background_color %} style="background-color:{{ content.block_background_color }};" {% endif %} data-aos="zoom-in-down" class="checklist-block {{ content.block_class|default:"" }}" {% if content.block_id %}id="{{ content.block_id }}"{% endif %}>
+	<div class="wrapper">
+		{% if content.checklist_heading %}
+			<h2 class="checklist-block__heading scheme-color">{{ content.checklist_heading }}</h2>
+		{% endif %}
+
+		<div class="checklist-block__content">
+			{% if content.checklist_text %}
+				<div class="checklist-block__desc">{{ content.checklist_text }}</div>
+			{% endif %}
+			<{{content.checklist_tag_type}} class="checklist-block__lists {{ content.checklist_layout }}">
+			{% for list in content.checklist_lists %}
+				<li data-aos="zoom-in-up" data-aos-delay="{{forloop.counter0|add:100}}">{{ list.checklist_list }}</li>
+			{% endfor %}
+			</{{content.checklist_tag_type}}>
+
+			{% if content.checklist_button_name %}
+				<a class="checklist-block__btn btn btn-primary scheme-color" href="{% if content.checklist_button_url %}{{content.checklist_button_url}}{% endif %}">
+                    {{ content.checklist_button_name }}
+                </a>
+			{% endif %}
+		</div>
+	</div>
+</div>
