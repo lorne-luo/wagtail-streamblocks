@@ -52,7 +52,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Lorne',
     author_email='lorne.luo@butterfly.com',
-    url='https://github.com/lorne.luo/wagtail_streamblocks',
+    url='http://tequila.butterfly.com.au/Django-packages/wagtail-streamblocks',
     packages=[
         'wagtail_streamblocks',
     ],

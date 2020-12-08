@@ -1,29 +1,16 @@
 =============================
 wagtail_streamblocks
 =============================
+streamblocks for wagtail
 
-.. image:: https://badge.fury.io/py/wagtail_streamblocks.svg
-    :target: https://badge.fury.io/py/wagtail_streamblocks
+http://tequila.butterfly.com.au/Django-packages/wagtail-streamblocks
 
-.. image:: https://travis-ci.org/lorne.luo/wagtail_streamblocks.svg?branch=master
-    :target: https://travis-ci.org/lorne.luo/wagtail_streamblocks
-
-.. image:: https://codecov.io/gh/lorne.luo/wagtail_streamblocks/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/lorne.luo/wagtail_streamblocks
-
-wagtail_streamblocks
-
-Documentation
--------------
-
-The full documentation is at https://wagtail_streamblocks.readthedocs.io.
-
-Quickstart
-----------
+Installation
+------------
 
 Install wagtail_streamblocks::
 
-    pip install wagtail_streamblocks
+    pip install git+ssh://git@tequila.butterfly.com.au/Django-packages/wagtail-streamblocks.git#0.1.0
 
 Add it to your `INSTALLED_APPS`:
 
@@ -31,38 +18,34 @@ Add it to your `INSTALLED_APPS`:
 
     INSTALLED_APPS = (
         ...
-        'wagtail_streamblocks.apps.WagtailStreamblocksConfig',
+        'wagtail_streamblocks',
+        'wagtailmedia',
+        'wagtail.contrib.table_block',
         ...
     )
 
-Add wagtail_streamblocks's URL patterns:
+How to Use
+----------
+
+Create stream content page
 
 .. code-block:: python
 
-    from wagtail_streamblocks import urls as wagtail_streamblocks_urls
+    from wagtail_streamblocks.models import BaseStreamContentPage
+
+    class StreamContentPage(BaseStreamContentPage):
+        pass
 
 
-    urlpatterns = [
-        ...
-        url(r'^', include(wagtail_streamblocks_urls)),
-        ...
-    ]
+Use stream block in template
 
-Features
---------
+.. code-block:: html
 
-* TODO
+    {% extends "base.html" %}
 
-Running Tests
--------------
-
-Does the code actually work?
-
-::
-
-    source <YOURVIRTUALENV>/bin/activate
-    (myenv) $ pip install tox
-    (myenv) $ tox
+    {% block content %}
+        {% include 'wagtail_streamblocks/stream_content_body.html' with content=page.content %}
+    {% endblock %}
 
 
 Development commands
@@ -72,15 +55,3 @@ Development commands
 
     pip install -r requirements_dev.txt
     invoke -l
-
-
-Credits
--------
-
-Tools used in rendering this package:
-
-*  Cookiecutter_
-*  `cookiecutter-djangopackage`_
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage
